@@ -3,40 +3,16 @@
 Based on the latest release of the [Apache Livy project](https://livy.incubator.apache.org/)
 
 
+YARN version
+
+docker build -t livy-server-docker:yarn .
+
+docker run -d --net=host -p 8998:8998 -h ecsa00400b48.epam.com -e SPARK_KAFKA_VERSION=0.10 -e HADOOP_CONF_DIR=/etc/hadoop/conf -v /etc/hadoop/conf:/etc/hadoop/conf -v /tmp:/tmp livy-server-docker:yarn
 
 
 
-------
+curl -X POST --data {kind: spark} -H "Content-Type: application/json" ecsa00400b48.epam.com:8998/sessions
 
-### Supported Versions:
+curl ecsa00400b48.epam.com:8998/sessions/0/statements -X POST -H 'Content-Type: application/json' -d '{code:val rdd = sc.parallelize(Array(1,2,3,4,5,6,7,8,9,10))}'
 
-Livy-Server: 0.5.0
-
-Apache Spark: 2.3.1
-
-Python: Python3 (including boto3 1.9)
-
-
-
-------
-
-### Configuration
-
-Required environment variables:
-
-- SPARK_MASTER_ENDPOINT => Spark Master IP
-- SPARK_MASTER_PORT => Spark Master Port
-- DEPLOY_MODE => *client* for PySpark applications and preferably *cluster* for Java/Scala applications 
-
-Per default the /tmp folder is configured as path for submitting local files via Livy Server
-
-Livy Server start on default port 8998
-
-------
-
-### Usage:
-
-```bash
-docker run -d -p 8998:8998 -e SPARK_MASTER_ENDPOINT=1.2.3.4 -e SPARK_MASTER_PORT=7077 -v /tmp:/tmp cloudiator/livy-server-docker:latest
-```
-
+curl ecsa00400b48.epam.com:8998/sessions/0/statements -X POST -H 'Content-Type: application/json' -d '{code:rdd.collect().foreach(println)}'

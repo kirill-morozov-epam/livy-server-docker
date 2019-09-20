@@ -22,6 +22,17 @@ RUN bpkg install cha87de/bashutil -g
 ADD init /opt/docker-init
 ADD conf /opt/docker-conf
 
+# set Python3 as default
+RUN rm  /usr/bin/python
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+RUN chmod 777 /opt
+RUN chmod 777 /var
+
+RUN useradd -rm -d /home/hdfs -s /bin/bash -g root -G sudo -u 1000 hdfs
+
+USER hdfs
+
 # folders
 RUN mkdir /opt/apache-livy
 RUN mkdir /var/apache-spark-binaries/
@@ -34,12 +45,12 @@ RUN unzip /tmp/livy.zip -d /opt/
 RUN mkdir /opt/livy-0.5.0-incubating-bin/logs
 
 # apache spark
-RUN wget https://archive.apache.org/dist/spark/spark-2.3.1/spark-2.3.1-bin-hadoop2.7.tgz -O /tmp/spark-2.3.1-bin-hadoop2.7.tgz
-RUN  tar -xvzf /tmp/spark-2.3.1-bin-hadoop2.7.tgz -C /opt/
+RUN wget https://archive.apache.org/dist/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.6.tgz -O /tmp/spark-2.2.0-bin-hadoop2.6.tgz
+RUN  tar -xvzf /tmp/spark-2.2.0-bin-hadoop2.6.tgz -C /opt/
 
-# set Python3 as default
-RUN rm  /usr/bin/python
-RUN ln -s /usr/bin/python3 /usr/bin/python
+#RUN mkdir /opt/spark2
+
+
 
 
  

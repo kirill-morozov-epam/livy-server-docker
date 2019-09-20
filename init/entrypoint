@@ -14,12 +14,12 @@ GLOBAL_VAR="xyz"
 ##############################################################################
 function validate(){
     vars="SPARK_MASTER_ENDPOINT SPARK_MASTER_PORT DEPLOY_MODE"
-    for var in $vars; do
-        if [[ $(env | awk -F "=" '{print $1}' | grep "^$var$") != "$var" ]]; then
-            echo "$var not set but required."
-            return 1
-        fi
-    done
+#    for var in $vars; do
+#        if [[ $(env | awk -F "=" '{print $1}' | grep "^$var$") != "$var" ]]; then
+#            echo "$var not set but required."
+#            return 1
+#        fi
+#    done
     if [[ -z ${GLOBAL_VAR+x} ]]; then
         echo "GLOBAL_VAR variable cannot be looked up."
         return 1
@@ -58,7 +58,8 @@ function init(){
 
 function livy_server_service(){
 
-    export SPARK_HOME=/opt/spark-2.3.1-bin-hadoop2.7/
+    export SPARK_KAFKA_VERSION=0.10
+    export SPARK_HOME=/opt/spark-2.2.0-bin-hadoop2.6/
     echo "starting Livy Server!"
     /opt/livy-0.5.0-incubating-bin/bin/livy-server start 
 

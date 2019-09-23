@@ -28,6 +28,7 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 
 RUN chmod 777 /opt
 RUN chmod 777 /var
+RUN chmod 777 /tmp
 
 RUN useradd -rm -d /home/hdfs -s /bin/bash -g root -G sudo -u 1000 hdfs
 
@@ -39,18 +40,16 @@ RUN mkdir /var/apache-spark-binaries/
 
 # binaries
 # apache livy
-RUN wget http://mirror.23media.de/apache/incubator/livy/0.5.0-incubating/livy-0.5.0-incubating-bin.zip -O /tmp/livy.zip
+RUN wget http://mirror.23media.de/apache/incubator/livy/0.6.0-incubating/apache-livy-0.6.0-incubating-bin.zip -O /tmp/livy.zip
 RUN unzip /tmp/livy.zip -d /opt/
 # Logging dir
-RUN mkdir /opt/livy-0.5.0-incubating-bin/logs
+RUN mkdir /opt/apache-livy-0.6.0-incubating-bin/logs
 
 # apache spark
-RUN wget https://archive.apache.org/dist/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.6.tgz -O /tmp/spark-2.2.0-bin-hadoop2.6.tgz
-RUN  tar -xvzf /tmp/spark-2.2.0-bin-hadoop2.6.tgz -C /opt/
+#RUN wget https://archive.apache.org/dist/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.6.tgz -O /tmp/spark-2.2.0-bin-hadoop2.6.tgz
+#RUN  tar -xvzf /tmp/spark-2.2.0-bin-hadoop2.6.tgz -C /opt/
 
-#RUN mkdir /opt/spark2
-
-
+RUN mkdir /opt/spark2
 
 
  

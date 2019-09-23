@@ -1,0 +1,43 @@
+{
+"driverMemory": "1G",
+"driverCores": 1,
+"executorCores": 1,
+"executorMemory": "1G",
+"numExecutors": 1,
+"queue": "default",
+"name": "stream_eksdm_resend_Z_RECORDS",
+"className": "com.sbt.datafactory.od.ess.pipelines.streaming.pprbarch2ess.App",
+"jars": [
+	"/user/mindrin6/livy/spark/libs/flume-appender-sbt.jar",
+	"/user/mindrin6/livy/spark/libs/metrics-cpu-spark.jar",
+	"/user/mindrin6/livy/spark/libs/spark-influx-sink-0.4.0-5-g4d5a114.jar",
+	"/user/mindrin6/livy/spark/libs/spark-streaming-kafka-0-10_2.11-2.2.0.cloudera2.jar",
+	"/user/mindrin6/livy/spark/libs/kafka-clients-0.10.2-kafka-2.2.0.jar",
+	"/user/mindrin6/livy/spark/libs/metrics-influxdb-1.1.8.jar"
+	],
+"files": [
+	"/user/mindrin6/livy/etc/hbase-site.xml",
+	"/user/mindrin6/livy/etc/hive-site.xml",
+	"/user/mindrin6/livy/spark/pipeline/conf/log4j.properties",
+	"/user/mindrin6/livy/spark/pipeline/conf/metrics-influxdb.conf"
+	],
+"conf": {
+	"spark.sql.shuffle.partitions": "200", 
+	"spark.streaming.backpressure.initialRate": "900", 
+	"spark.streaming.kafka.maxRatePerPartition": "8000", 
+	"spark.dynamicAllocation.executorIdleTimeout": "600", 
+	"spark.dynamicAllocation.enabled": "true", 
+	"spark.shuffle.service.enabled": "true", 
+	"spark.dynamicAllocation.initialExecutors": "1", 
+	"spark.streaming.concurrentJobs": "1",  
+	"spark.dynamicAllocation.minExecutors": "1", 
+	"spark.dynamicAllocation.maxExecutors": "10", 
+	"spark.executor.extraClassPath": "flume-appender-sbt.jar:metrics-cpu-spark.jar:spark-influx-sink-0.4.0-5-g4d5a114.jar:metrics-influxdb-1.1.8.jar:kafka-clients-0.10.2-kafka-2.2.0.jar:spark-streaming-kafka-0-10_2.11-2.2.0.cloudera2.jar", 
+	"spark.driver.extraClassPath": "flume-appender-sbt.jar:metrics-cpu-spark.jar:spark-influx-sink-0.4.0-5-g4d5a114.jar:metrics-influxdb-1.1.8.jar:kafka-clients-0.10.2-kafka-2.2.0.jar:spark-streaming-kafka-0-10_2.11-2.2.0.cloudera2.jar", 
+	"spark.metrics.conf": "metrics-influxdb.conf", 
+	"spark.metrics.namespace": "stream_eksdm_resend_Z_RECORDS", 
+	"spark.executor.extraJavaOptions": "-Dmodule=stream_eksdm_resend_Z_RECORDS_79 -Dflume_url= -Dderby.system.home=/tmp/eksdm/stream_eksdm_resend_Z_RECORDS",
+	"spark.driver.extraJavaOptions": "-Dhbase.zookeeper.quorum=ecsa00400926.epam.com:2181 -Dspark.checkPointDir=/tmp/com_sbt_datafactory_ckpt  -Dbroker2ess_stream.mapping.paths=/user/mindrin6/IBS_GBK/mapping/stg_datamart  -Dhbase.columnfamily=cf  -Dkafka.batchDuration=10  -Dspark.streaming.backpressure.enabled=false  -Dkafka.topics=delta-Z_RECORDS_mindrin6  -Dkafka.topics.errors=  -Dkafka.reader.bootstrap.servers=ecsa00400926.epam.com:9092,ecsa00400927.epam.com:9092,ecsa00400b48.epam.com:9092  -Dkafka.writer.bootstrap.servers=ecsa00400926.epam.com:9092,ecsa00400927.epam.com:9092,ecsa00400b48.epam.com:9092  -Dkafka.group.id=stream_eksdm_resend_Z_RECORDS_group1  -Dkafka.reset.offset=latest  -Dkafka.writer.partitions=10  -Dsource=custom_t_eksdm_mindrin6  -Dtarget=custom_t_eksdm_mindrin6  -Dmeta.path.source=/user/mindrin6/IBS_GBK/meta//kafka/,/user/mindrin6/IBS_GBK/meta//stg_dm/  -Dmeta.path.target=/user/mindrin6/IBS_GBK/meta//kafka/,/user/mindrin6/IBS_GBK/meta//stg_dm/  -Dmeta.source=meta  -Dsql.mapper=DataFrameSqlMapperSafe  -Dtimestamp.column=ts  -Dbroker2ess_stream.converter=AvroSLConverter  -Dbroker2ess_stream.out.converter=JsonConverter  -Dbroker2ess_stream.writer=WriterToHBaseSHC  -Dbroker2ess_stream.writer.meta=KafkaWriterKV  -Dbroker2ess_stream.target.topics.meta=delta-Z_RECORDS-part_mindrin6  -Dbroker2ess_stream.tables=z_ac_fin_lock,z_records_lock  -Dprocessing.mode=resend_records  -Dmodule=stream_eksdm_resend_Z_RECORDS  -Dinput.table=Z_RECORDS  -Dreport.date=  -Dcols.for.select=*  -Dflume_url=  -Dkafka.request.timeout.ms=200001  -Dkafka.session.timeout.ms=200000  -Dkafka.enable.auto.commit=false  -DstateSender.url=http://lang30.ca.sbrf.ru:8086/write?db=kafka -DstateSender.active=false -DstateSender.maxconnect=100  -Dssl.enabled=false  -Dssl.key.password=  -Dssl.keystore.password=  -Dssl.truststore.password= -DSPARK_KAFKA_VERSION=0.10" 
+	},
+"file": "/user/mindrin6/livy/spark/jars/ru_sbrf_sberdata_core_eksdm_stream-2.7-assembly.jar"
+}
